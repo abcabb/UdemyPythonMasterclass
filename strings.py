@@ -37,3 +37,28 @@ print(anotherSplitString2)
 # Bunun için iki yol var : raw string kullanmak veya backslash'ten backslash ile kaçmak:
 print(r"C:\Users\timbuchalka\notes.txt") #raw string
 print("C:\\Users\\timbuchalka\\notes.txt") #outputta \ görmek için \\yazman lazım.
+
+# Variables in Python
+
+# Python is "Dynamically Typed" and "Strongly Typed" language. Lest See what that means :
+
+#Python'da type'ı variable'lar değil de, daha çok value yani değerler alır. Variable'ların type'ı olmaz. Sadece o anda işaret ettiği value type'ı her ne ise
+# onun da type'ı o olur.
+
+age = 24 # integer
+print(age)
+print(type(age))
+
+age = "2 years" #string
+print(age)
+print(type(age))
+
+name = "Ali"
+age = 24 #integer
+age_in_words = "2 years"
+# print(name + " is " + age + " years old.")
+# TypeError alırız. TypeError : can only concatenate str to str. Not str to int.
+#Python, + ile string verilmişse concat, iki int verilmişse işlem yapacağını bilir. Ama bir str bir int ile ne yapacağını bilemez.
+
+#Java gibi bazı diller int'ları string lerle toplayınca string e çevirip concat işlemi yapabiliyor. Python bunu yapmaz.
+#Bu Automatic Type Conversion işlemi bazı kolaylıkları olsa da, bug fixing işlemini zorlaştırıyor diyebiliriz.
