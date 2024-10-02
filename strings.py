@@ -62,3 +62,14 @@ age_in_words = "2 years"
 
 #Java gibi bazı diller int'ları string lerle toplayınca string e çevirip concat işlemi yapabiliyor. Python bunu yapmaz.
 #Bu Automatic Type Conversion işlemi bazı kolaylıkları olsa da, bug fixing işlemini zorlaştırıyor diyebiliriz.
+
+# f-string kullanımı (formatted string literals)
+
+print(name + f" is {age} years old")
+print(f"pi is approximately {22/7:50.50f} ")
+# Not: format yaparken, :50, :30 demek şu demektir; Sayının toplam genişliği 30'dan küçük olursa, kalan yerleri boşluklarla değerlendir.
+# Aynı şekilde 50 için de. Hatta bu boşluklar default olarak soldan konur. :<50 yazarsak sağa konur.
+# Ama sayı genişliği mesela :30 için 50 genişliğinde bir sayı ise, hiçbir şey değişmez. Formatın mantığı budur.
+
+pi = 22/7
+print(f"pi is approximately {pi:50.50f} ")
