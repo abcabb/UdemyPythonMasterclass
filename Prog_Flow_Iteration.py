@@ -104,9 +104,10 @@ availableExits = ["north", "south", "east", "west"]
 
 chosenExit = ""
 
-while chosenExit not in availableExits:
+while chosenExit not in availableExits: # Şartı sağladığı sürece while bloğunda kalır.
     chosenExit = input("Enter an exit direction: ").casefold()
     if chosenExit == "quit":
         print("Game Over")
-        break
-print("Arent you glad you got out of there")
+        break   # Yani, eğer break keyword'u okursa else statement'ına girmeden döngüden çıkar.
+else: # While döngüsü şartını sağlamadığı zaman else bloğuna gelir.
+    print("Arent you glad you got out of there")
