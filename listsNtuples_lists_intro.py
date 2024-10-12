@@ -117,10 +117,15 @@ while current_choice != "0":
 
     # if current_choice in "123456": Bunun yerine;
     if current_choice in valid_choices:
-        print("{} added to the list.".format(current_choice))
         index_of_chosen = int(current_choice) - 1
         chosen_part = available_parts[index_of_chosen]
-        computer_parts2.append(chosen_part)
+        if chosen_part in computer_parts2: # for item remove from the list
+            print("{} removed from the list.".format(current_choice))
+            computer_parts2.remove(chosen_part)
+        else:
+            print("{} added to the list.".format(current_choice))
+            computer_parts2.append(chosen_part)
+        print("Your list now contains {}".format(computer_parts2))
 
         # if current_choice == "1":
         #     computer_parts2.append("computer")
@@ -163,3 +168,214 @@ while current_choice != "0":
     current_choice = input()
 
 print(computer_parts2)
+
+# Sorting Lists:
+
+evenn = [1,3,5,7,9]
+odd = [0,2,4,6,8]
+
+evenn.extend(odd)   # .extend() = Concatenate two lists
+# contanete_lists = evenn + odd   bu da bir metoddur.
+
+print(evenn)
+
+digits_2 = sorted("467982135")
+
+print(digits_2)
+
+evenn.sort() # increase order ile sıralar
+print(evenn)
+
+evenn.sort(reverse=True) # reverse, sort fonksiyonunun içerisindeki bir argüman.
+# Ona buradan değer atayarak ters listelemesini sağlarız.
+print(evenn)
+# Dikkat edersen yeni bir liste oluşturmadık. Bir listeyi düzenledik. (evenn listesi)
+# Yeni oluşturan metodlar var ama, "sort metodu listeyi kopyalamaz! İçerisindeki itemleri düzenler."
+
+# Listeler haricindeki şeyleri sıralamak için sorted() function
+pangram = "The quick brown fox jumps over the lazy dog"
+
+letters = sorted(pangram)
+print(letters)
+# Outputta space'leri en başta, sonrasında Capital harfleri, sonrasında da sırasıyla diğer harfleri gördük.
+# Bunun sebebini biliyorsun ASCII ye göre sort edildikleri için.
+# sorted function'u budur. İçerisine bir iterable verilir, fonksiyon da itemlerini listede sıralanmış olarak döndürür.
+# Diğerlerinden farkı, yeni bir liste oluşturup onu döndürmesidir. Bu önemlidir.
+
+numberss = [8.6, 4.3, 6.7, 2.5, 3.9, 7.8, 2.1]
+
+sorted_numberss = sorted(numberss)
+print(sorted_numberss)
+print(numberss)     # Bu hala sort edilmemiştir çünkü sorted() fonksiyonu yeni liste oluşturdu bunu ellemedi.
+
+# sorted() fonksiyonu yeni liste oluşturup liste döndürürken, sort hiçbir değer döndürmez. (None değeri döndürür)
+
+new_numb_list = [6,2,5,9,1]
+
+sorted_new_numb_list = new_numb_list.sort()
+print(new_numb_list)    # Sort edilmiş liste
+print(sorted_new_numb_list)  # None
+
+# Bir literal'ı da sort edebiliriz
+
+missing_letter = "abCgfed"  # String literal
+
+print(sorted(missing_letter, key=str.casefold)) # key kısmı Capital Case insensitive olsun diye.
+
+namess = ["Ali",
+          "Veli",
+          "ayşe",
+          "fatma",
+          "Omer"]
+
+namess.sort()
+print(namess)  # Case sensitive olduğu için büyük harfle başlayanlar önce sıralanır.
+namess.sort(key=str.casefold)
+print(namess)
+
+print(sorted(namess))
+print(sorted(namess, key=str.casefold))
+
+# Using list to create a list from an iterable. (list bir fonksiyon değil, bir sınıf initializer'ıdır.)
+
+digits_3 = list("648972153")
+
+print(digits_3)  # Bir liste oluşur. Ama sırasız. Herhangi bir iterable için list() kullanarak liste oluşturabilirsin.
+
+even2 = [1, 3, 5, 7, 9]
+odd2 = [0, 2, 4, 6, 8]
+
+concat_numbers = even2 + odd2
+more_numbers = list(concat_numbers)
+
+print(concat_numbers)
+print(more_numbers)
+
+print(concat_numbers is more_numbers)  # false
+print(concat_numbers == more_numbers)  # true
+# concat_numbers ve more_numbers eşitlerdir. Yani içeriklerindeki değerler aynıdır.
+# Ama aynı liste değillerdir. Her iki liste de yeni oluşturulan listelerdir.
+
+# Aynı listeden yeni bir tane oluşturmanın başka bir yöntemi : slice
+
+more_numbers2 = concat_numbers[:]
+print(more_numbers2)
+print(more_numbers2 is concat_numbers)  # false
+
+# Bir liste kopyalamanın En iyi yolu .copy() metodu.
+
+more_numbers3 = concat_numbers.copy()
+print(more_numbers3)
+print(more_numbers3 is concat_numbers)  # false
+
+new_list = ["computer", "monitor", "keyboard", "mouse", "mouse mat"]
+print(new_list)
+
+new_list[3] = "trackball"
+print(new_list)
+
+new_list[4:] = "mouse"  # Bir iterable atadık, tek tek itemlerini listeye ekler.
+print(new_list)
+
+new_list[-1::1] = ["mouse mat"]  # Bu şekilde bir liste içerisinde ilettiğimiz için iterable'ın item'ı string dir ve tek bir string olarak eklenir.
+print(new_list)
+
+data1 = [4, 5, 101, 108, 132, 142, 165, 182, 188, 192,
+         205, 255, 265, 274, 291, 380, 390]
+# print(data1)
+# del data1[0]
+# print(data1)
+# del data1[1]
+print(data1)
+min_valid_number = 100
+max_valid_number = 200
+
+for index, item in enumerate(data1):  # Doğru çalışmaz çünkü listeden her eleman silindiği zaman index değerleri değişir.
+    if (item<min_valid_number) or (item>max_valid_number):
+        del data1[index]
+# Iterate ettiğin object'in size'ını değiştirirken sorular yaşarsın.
+
+print(data1)
+
+# Safely removing values from a list
+
+data2 = [4, 5, 101, 108, 132, 142, 165, 182, 188, 192,
+         205, 255, 265, 274, 291, 380, 390]
+
+stop = 0
+for index, value in enumerate(data2):
+    if value >= min_valid_number:
+        stop = index
+        break
+
+print(stop)
+del data2[:stop]  # Bu şekilde 100'den küçük değerleri silebiliriz. (data sıralı olduğu için)
+print(data2)
+
+# Üst değerleri silelim
+
+start = 0
+                #  Başlangıç   , bitiş (dahil olmadığı için bir azalttık, artış miktarı
+for index in range(len(data2)-1, -1, -1):  #  range fonksiyonu slice mantığıyla çalışmaz.
+    print(index)
+    if data2[index] <= max_valid_number:
+        stop = index + 1
+        break
+
+del data2[stop:]  # Bu sayede 200'den büyük sayıları sildik.
+print(data2)
+
+# Removing Items From a List backwards
+
+data3 = [103,185,174,308,164,189,3,142,
+         112,4,101,394,192]
+min_valid_number = 100
+max_valid_number = 200
+
+for index in range(len(data3)-1, -1, -1):
+    if data3[index] < min_valid_number or data3[index] > max_valid_number:
+        print(index)  # Beklediğimiz değerleri aldık. 11 - 9 - 6 - 3
+        del data3[index]
+
+print(data3)
+
+# Peki for ile düzgün çalışan bu kod enumerate ile neden indexleri atladığı için doğru çalışmıyor?
+# Çünkü elemanları tersten siliyoruz. Bir eleman silindiği zaman sadece ondan sonrakilerin index değerleri değişir.
+# Öncesindeki itemlerin indexleri aynı olduğundan, silinme işlemi loop'u bozmaz.
+
+# Enumerate ile şu şekilde yapabiliriz :
+
+data4 = [103,185,174,308,164,189,3,142,
+         112,4,101,394,192]
+
+last_index = len(data4)-1
+for index, value in enumerate(reversed(data4)):
+    if value < min_valid_number or value > max_valid_number:
+        print(last_index - index, value)
+        del data4[last_index - index]  # Amacımız listeye baktığında liste üzerinden tersten siliyor olmak.
+
+print(data4)
+
+# Aynı problem için farklı bir yaklaşım :
+
+data5 = [103,185,174,308,164,189,3,142,
+         112,4,101,394,192]
+
+last_index = len(data5) - 1
+for index, value in enumerate(data5[::-1]):
+    if value < min_valid_number or value > max_valid_number:
+        print(last_index - index, value)
+        del data5[last_index - index]
+
+print(data5)
+
+# Time
+
+# BUNLARIN ARASINDA RUNTİME'I EN İYİ OLAN SORTED LİST'İ SIRALAYANLARDIR.
+# Bunun sebebi o yöntem tekte silerken, diğerleri tek tek bakıp siliyor.
+# DAHA SONRASINDA ENUMERATE FONKSİYONUNU KULLANANLAR DAHA VERİMLİ.
+# EN VERİMSİZİ İSE RANGE FONKSİYONU İLE ELEMAN SİLEN.
+
+# 10 MİLYON ELEMANIN OLDUĞU LİSTELERİN OUTPUTUNU GÖREBİLMEK İÇİN
+# SIRALANMIŞ OLARAK YAPTIĞIMIZ METOD 1 SANIYENIN ALTINDA IKEN,
+# ENUMERATE METODUYLA 9 SANİYEDE SONUCU ALDIK.  Daha çok veri için daha da verimsiz.
