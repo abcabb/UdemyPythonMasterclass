@@ -379,3 +379,272 @@ print(data5)
 # 10 MİLYON ELEMANIN OLDUĞU LİSTELERİN OUTPUTUNU GÖREBİLMEK İÇİN
 # SIRALANMIŞ OLARAK YAPTIĞIMIZ METOD 1 SANIYENIN ALTINDA IKEN,
 # ENUMERATE METODUYLA 9 SANİYEDE SONUCU ALDIK.  Daha çok veri için daha da verimsiz.
+
+
+# Nested Lists
+
+even3 = [2,4,6,8]
+odd3 = [1,3,5,7,9]
+
+number_lists1 = [even3,odd3]  # 2 Lists inside of a List.
+print(number_lists1)
+
+# Bunu göstermek için:
+
+for number_list in number_lists1:
+    print("-"*50)
+    print(number_list)
+    print("-"*50)
+
+    for value in number_list:
+        print(value)
+
+#  How to write list due to PEP-8 :
+# İlk eleman bir enter sonrasına yazılır. Son square bracket de altta yazılır. Hepsi 4 satır atlanarak alt alta
+
+menus1 = [
+    ["egg", "bacon"],
+    ["egg", "sausage", "bacon"],
+    ["egg", "spam"],
+    ["egg", "bacon", "spam"],
+    ["egg", "bacon", "sausage", "spam"],
+    ["spam", "bacon", "sausage", "spam"],
+    ["spam", "sausage", "spam", "bacon", "spam", "tomato", "spam"],
+    ["spam", "egg", "spam", "spam", "bacon", "spam"], # Son virgul genelde redundant'dır. Ama koyması edit işini kolaylaştırır.
+]  # Ornegin google style guide'ı o son virgulu koymayı onerir.
+
+# Doğru yazım bu şekilde olmalıdır.
+
+for menu_list in menus1:
+    if "spam" not in menu_list:
+        print("-"*10)
+        print(menu_list)
+        print("-"*10)
+
+        for value in menu_list:
+            print(value)
+
+    else:
+        print("{} has spam score of {}"
+              .format(menu_list, menu_list.count("spam")))
+
+# Challange : Print out all the menus on the list with spam removed.
+
+menus2 = [
+    ["egg", "bacon"],
+    ["egg", "sausage", "bacon"],
+    ["egg", "spam"],
+    ["egg", "bacon", "spam"],
+    ["egg", "bacon", "sausage", "spam"],
+    ["spam", "bacon", "sausage", "spam"],
+    ["spam", "sausage", "spam", "bacon", "spam", "tomato", "spam"],
+    ["spam", "egg", "spam", "spam", "bacon", "spam"],
+]
+
+for menu_list in menus2:
+    if "spam" not in menu_list:
+        print("-"*10)
+        print(menu_list)
+        print("-"*10)
+
+        for value in menu_list:
+            print(value)
+
+    else:
+        last_index_of_current_list = len(menu_list) - 1
+        for index, value in enumerate(reversed(menu_list)):
+            if value == "spam":
+                print("index: {}  value: {}  is deleted".format(index,value))
+                print("-"*20)
+                del menu_list[last_index_of_current_list - index]  # Bu döngü sonucu her listedeki spamlerin hepsi silinecek
+
+i=1
+for menu_list in menus2:
+    print("Menu-{}".format(i))
+    i+=1
+    print(menu_list)    # Menuleri tek tek sıralayıp listeler.
+
+# Teacher's Solution to this challange
+menus4 = [
+    ["egg", "bacon"],
+    ["egg", "sausage", "bacon"],
+    ["egg", "spam"],
+    ["egg", "bacon", "spam"],
+    ["egg", "bacon", "sausage", "spam"],
+    ["spam", "bacon", "sausage", "spam"],
+    ["spam", "sausage", "spam", "bacon", "spam", "tomato", "spam"],
+    ["spam", "egg", "spam", "spam", "bacon", "spam"],
+]
+
+print("---"*20)
+
+for list in menus4:
+    for item in list:
+        if item != "spam":
+            print(item)
+    print()
+
+print("---"*20)
+
+menus3 = [
+    ["egg", "bacon"],
+    ["egg", "sausage", "bacon"],
+    ["egg", "spam"],
+    ["egg", "bacon", "spam"],
+    ["egg", "bacon", "sausage", "spam"],
+    ["spam", "bacon", "sausage", "spam"],
+    ["spam", "sausage", "spam", "bacon", "spam", "tomato", "spam"],
+    ["spam", "egg", "spam", "spam", "bacon", "spam"],
+]
+
+for list in menus3:
+    for index in range(len(list)-1, -1, -1):
+        if list[index] == "spam":
+            del list[index]
+
+    print(list)
+
+# İf we want to format the way how output is. (Default list format is inside of square brackets [])
+
+
+# Function's Signatures
+# Print Function
+print()
+
+name = "Semi"
+age = "8"
+print(name, age, "Python", 2024)
+# Fonksiyon definition'da " *objects " vardı. Buradaki asterisk(star) birden fazla value sağlanabileceğini belirtir.
+# Biz de bu sayede 4 tane değişken fonksiyon içerisine girebildik.
+
+# "sep" parameter in print()
+
+print(name, age, "Java", 2022, sep=" ,") # sep default olarak (sep = " ") dir.
+# Output : Semi ,8 ,Java ,2022
+
+# "end" parameter in print()
+
+for i in range(1,11):
+    print(i)
+
+for i in range(1,11):
+    print(i, end = " - ") # end default olarak (end = \n) dır.
+# Output : 1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9 -
+
+# THE .join() METHOD
+print(end = "\n\n")
+# print() fonksiyonu, içerisine bir list konduğunda default olarak
+# ['item1','item2','item3'] olarak gösterir. Bu tırnakları ve parantezleri düzenleyebiliriz.
+
+instance_list = [
+    "item1",
+    "item2",
+    "item3"
+]
+
+print(instance_list)  # Output : ['item1', 'item2', 'item3']
+print(", ".join(instance_list))  # Output : item1, item2, item3
+
+# .join() metodu, bir iterable'ın item'larını tek tek alır. Ve join ettiği şey ile onları ayırır. Bu kadar.
+
+ornek_seperator = " *|* "
+seperated_list = ornek_seperator.join(instance_list)
+
+print(seperated_list)  # Output : item1 *|* item2 *|* item3
+
+string_1 = "thisisastirng"
+seperator1 = " | "
+print(seperator1.join(string_1))  # String iterable'ının itemlerinin arasına koyar (harflerin).
+
+# .join , str class'ının bir metodudur. Bir iterable'ı iterate eder, her bir ogesinin arasına string koyar ve yeni bir string oluşturur.
+
+# Not : eğer itemleri .join() etmek istiyorsan
+# Bütün elemanlar STRING olmak zorundadır.
+
+instance_list2 = ["1, 3, 5", "265", 8]
+
+print(instance_list2)  # Output : ['1, 3, 5', '265', 8]
+# " | ".join(instance_list2) Runtime type error. Çünkü listede integer var. Yani listeler homogenous olmalı.
+
+# THE .split() METHOD - Opposite of .join() method for strings.
+
+# The split method splits a string up into "words". (kelimelere bölüyo)
+
+pangram = "The quick\n brown fox jumps over\t the lazy dog"
+
+word_list = pangram.split()
+
+print(word_list)  # Output : ['The', 'quick', 'brown', 'fox', 'jumps', 'over', 'the', 'lazy', 'dog']
+
+# .split() fonksiyonunda "sep" keywordu
+
+# Bu keyword string'de kelimeleri hangi değerin ayıracağını belirler. Default olarak sep = ' ' (1 space karakter) dir.
+
+instance_string = "HelloxThisxIsxAnxInstancexString"
+
+word_list2 = instance_string.split(sep = 'x')
+
+print(word_list2)
+
+instance_string2 = "5,923,484,824,321,674"
+
+word_list3 = instance_string2.split(",")
+
+print(word_list3)
+
+generated_list = ['9', ' ',
+                  '2', '2', '3', ' ',
+                  '3', '7', '2', ' ',
+                  '0', '3', '6', ' ',
+                  '8', '5', '4', ' ',
+                  '7', '7', '5', ' ',
+                  '8', '0', '7']
+values = "".join(generated_list)
+print(values)
+values_list = values.split()
+print(values_list)
+
+# CHALLANGE
+
+# Use a for loop to produce a list of ints, rather than strings.
+# You can either modify the contents of the 'values_list' list in place,
+# or create a new list of ints.
+
+# Lets modify the "values_list" list.
+
+new_list = []
+for item in values_list:
+    print("{} added to the list as an integer".format(item))
+    new_list.append(int(item))
+print(new_list)
+
+# Teachers solutions
+print(values_list)
+for index in range(len(values_list)):
+    values_list[index] = int(values_list[index])  # Buradaki hatayı ignore edebiliriz. Çünkü yapmak istediğimiz şey string içeren listeye int atamak.
+print(values_list)
+
+
+# Onemli bir kod. Yaptığım bir hata :
+
+number_list2 = "7,5,-1".split(',')  # Liste oluşturduk
+print(number_list2)
+
+for index, item in enumerate(number_list2):
+    number_list2[index] = int(item)  # integer'a çevirdik
+
+result = 0 # YAPTIĞIM HATA :
+# for i in range(len(number_list)):
+#     result += number_list[i]
+# else:
+#     result -= number_list[i]
+# Olmaz çünkü for döngüsünde range(2) i=2 asla olmaz. Else bloğuna geçtiğinde i=1'dir.
+
+i=0
+while(i != len(number_list2)-1):
+    result += number_list2[i]
+    i += 1
+else:
+    result -= number_list2[i]
+
+print(result)
