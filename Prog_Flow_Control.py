@@ -1,6 +1,19 @@
 # Random Module In Python and Guess Game
 import random
 
+# Girdiyi kontrol etmek için fonksiyon tanımlayalım :
+
+
+def get_integer(prompt):
+    while True:
+        # print(prompt)
+        user_input = input(prompt)
+        if user_input.isnumeric():
+            return int(user_input)
+        # else:  # else gerekli değildir çünkü if bloğuna girerse return okur.
+        print("Please enter a number: ")
+
+
 higher = 1000
 answer = random.randint(1,higher) #it includes both end points
 guessOfUser = None
@@ -11,7 +24,9 @@ while True:
     if counter == 0:
         print("You lost the game")
         break
-    guessOfUser = int(input("Please guess a number between 1 and {}. 0 for quit. ({} claims left) : ".format(higher,counter)))
+    # guessOfUser = int(input("Please guess a number between 1 and {}. 0 for quit. ({} claims left) : ".format(higher,counter)))
+    guessOfUser = get_integer("Please enter an integer: ")
+    # Artık integer girilmediğinde hata vermez. Bir daha girdi alır.
     if guessOfUser == 0:
         print("Game over. You gave up.")
         break
